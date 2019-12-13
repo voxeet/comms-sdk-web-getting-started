@@ -1,33 +1,27 @@
-const voxeet = new VoxeetSdk();
-
 const avengersNames = ['Thor', 'Cap', 'Tony Stark', 'Black Panther', 'Black Widow', 'Hulk', 'Spider-Man'];
 let randomName = avengersNames[Math.floor(Math.random() * avengersNames.length)];
-let participants = {};
 
-const main = () => {
-  voxeet.initialize('customerKey', 'customerSecret', {name: randomName})
-    .then((currentUserId) => {
-      initUI();
-    })
-    .catch((err) => {
-      console.log(err);
+const main = async () => {
+    /* Events handlers */
+    VoxeetSdk.conference.on('streamAdded', (participant, stream) => {
+        if (stream.type === 'ScreenShare') return addScreenShareNode(stream);
+        addVideoNode(participant, stream);
+        addParticipantNode(participant);
     });
-  
-  voxeet.on('participantJoined', (userId, stream) => {
-    addParticipantNode(userId);
-    addVideoNode(userId, stream);
-  });
-  
-  voxeet.on('participantLeft', (userId) => {
-    removeVideoNode(userId);
-    delete participants[userId];
-    removeParticipantNode(userId);
-  });
-  
-  voxeet.on('participantAdded', (userId, userInfo) => {
-    participants[userId] = userInfo;
-  });
-  
-};
+
+    VoxeetSdk.conference.on('streamRemoved', (participant, stream) => {
+        if (stream.type === 'ScreenShare') return removeScreenShareNode();
+        removeVideoNode(participant);
+        removeParticipantNode(participant);
+    });
+
+    try {
+        await VoxeetSdk.initialize('customerKey', 'customerSecret');
+        await VoxeetSdk.session.open({ name: randomName });
+        initUI();
+    } catch (e) {
+        alert('Something went wrong : ' + e);
+    }
+}
 
 main();
