@@ -20,8 +20,8 @@ const initUI = () => {
       1. Create a conference room with an alias
       2. Join the conference with its id
       */
-      VoxeetSdk.conference.create({ alias: conferenceAlias })
-          .then((conference) => VoxeetSdk.conference.join(conference, {}))
+      VoxeetSDK.conference.create({ alias: conferenceAlias })
+          .then((conference) => VoxeetSDK.conference.join(conference, {}))
           .then(() => {
               joinButton.disabled = true;
               leaveButton.disabled = false;
@@ -33,7 +33,7 @@ const initUI = () => {
   };
 
   leaveButton.onclick = () => {
-      VoxeetSdk.conference.leave()
+      VoxeetSDK.conference.leave()
           .then(() => {
               joinButton.disabled = false;
               leaveButton.disabled = true;
@@ -46,7 +46,7 @@ const initUI = () => {
   };
 
   startVideoBtn.onclick = () => {
-      VoxeetSdk.conference.startVideo(VoxeetSdk.session.participant)
+      VoxeetSDK.conference.startVideo(VoxeetSDK.session.participant)
           .then(() => {
               startVideoBtn.disabled = true;
               stopVideoBtn.disabled = false;
@@ -54,7 +54,7 @@ const initUI = () => {
   };
 
   stopVideoBtn.onclick = () => {
-      VoxeetSdk.conference.stopVideo(VoxeetSdk.session.participant)
+      VoxeetSDK.conference.stopVideo(VoxeetSDK.session.participant)
           .then(() => {
               stopVideoBtn.disabled = true;
               startVideoBtn.disabled = false;
@@ -62,7 +62,7 @@ const initUI = () => {
   };
 
   startScreenShareBtn.onclick = () => {
-      VoxeetSdk.conference.startScreenShare()
+      VoxeetSDK.conference.startScreenShare()
           .then(() => {
               startScreenShareBtn.disabled = true;
               stopScreenShareBtn.disabled = false;
@@ -71,7 +71,7 @@ const initUI = () => {
   };
 
   stopScreenShareBtn.onclick = () => {
-      VoxeetSdk.conference.stopScreenShare()
+      VoxeetSDK.conference.stopScreenShare()
           .then(() => {
               startScreenShareBtn.disabled = false;
               stopScreenShareBtn.disabled = true;
@@ -81,7 +81,7 @@ const initUI = () => {
 
   startRecordingBtn.onclick = () => {
       let recordStatus = document.getElementById('record-status');
-      VoxeetSdk.recording.start()
+      VoxeetSDK.recording.start()
           .then(() => {
               recordStatus.innerText = 'Recording...';
               startRecordingBtn.disabled = true;
@@ -94,7 +94,7 @@ const initUI = () => {
 
   stopRecordingBtn.onclick = () => {
       let recordStatus = document.getElementById('record-status');
-      VoxeetSdk.recording.stop()
+      VoxeetSDK.recording.stop()
           .then(() => {
               recordStatus.innerText = '';
               startRecordingBtn.disabled = false;
@@ -138,7 +138,7 @@ const addParticipantNode = (participant) => {
   const participantsList = document.getElementById('participants-list');
 
   // if the participant is the current session user, don't add himself to the list
-  if (participant.id === VoxeetSdk.session.participant.id) return;
+  if (participant.id === VoxeetSDK.session.participant.id) return;
 
   let participantNode = document.createElement('li');
   participantNode.setAttribute('id', 'participant-' + participant.id);
