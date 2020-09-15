@@ -2,26 +2,43 @@ const avengersNames = ['Thor', 'Cap', 'Tony Stark', 'Black Panther', 'Black Wido
 let randomName = avengersNames[Math.floor(Math.random() * avengersNames.length)];
 
 const main = async () => {
-    /* Events handlers */
-    VoxeetSDK.conference.on('streamAdded', (participant, stream) => {
-        if (stream.type === 'ScreenShare') return addScreenShareNode(stream);
-        addVideoNode(participant, stream);
-        addParticipantNode(participant);
-    });
+  /* Event handlers */
 
-    VoxeetSDK.conference.on('streamRemoved', (participant, stream) => {
-        if (stream.type === 'ScreenShare') return removeScreenShareNode();
-        removeVideoNode(participant);
-        removeParticipantNode(participant);
-    });
-
-    try {
-        await VoxeetSDK.initialize('customerKey', 'customerSecret');
-        await VoxeetSDK.session.open({ name: randomName });
-        initUI();
-    } catch (e) {
-        alert('Something went wrong : ' + e);
+  // When a video stream is added to the conference
+  VoxeetSDK.conference.on('streamAdded', (participant, stream) => {
+    if (stream.type === 'ScreenShare') {
+      return addScreenShareNode(stream);
     }
+
+    addVideoNode(participant, stream);
+    addParticipantNode(participant);
+  });
+
+  // When a video stream is removed from the conference
+  VoxeetSDK.conference.on('streamRemoved', (participant, stream) => {
+    if (stream.type === 'ScreenShare') {
+      return removeScreenShareNode();
+    }
+
+    removeVideoNode(participant);
+    removeParticipantNode(participant);
+  });
+
+  try {
+    // Initialize the Voxeet SDK
+    // WARNING: It is best practice to use the VoxeetSDK.initializeToken function to initialize the SDK.
+    // Please read the documentation at:
+    // https://dolby.io/developers/interactivity-apis/client-sdk/initializing
+    VoxeetSDK.initialize('customerKey', 'customerSecret');
+
+    // Open a session for the user
+    await VoxeetSDK.session.open({ name: randomName });
+
+    // Initialize the UI
+    initUI();
+  } catch (e) {
+    alert('Something went wrong : ' + e);
+  }
 }
 
 main();
