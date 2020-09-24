@@ -15,13 +15,32 @@ const initUI = () => {
   joinButton.disabled = false;
 
   joinButton.onclick = () => {
-    let conferenceAlias = conferenceAliasInput.value;
+    // Default conference parameters
+    // See: https://dolby.io/developers/interactivity-apis/client-sdk/reference-javascript/model/conferenceparameters
+    let conferenceParams = {
+      liveRecording: false,
+      rtcpMode: "average", // worst, average, max
+      ttl: 0,
+      videoCodec: "H264" // H264, VP8
+    };
+
+    // See: https://dolby.io/developers/interactivity-apis/client-sdk/reference-javascript/model/conferenceoptions
+    let conferenceOptions = {
+      alias: conferenceAliasInput.value,
+      params: conferenceParams
+    };
 
     // 1. Create a conference room with an alias
-    VoxeetSDK.conference.create({ alias: conferenceAlias })
+    VoxeetSDK.conference.create(conferenceOptions)
       .then((conference) => {
+        // See: https://dolby.io/developers/interactivity-apis/client-sdk/reference-javascript/model/joinoptions
+        const constraints = {
+          audio: true,
+          video: false
+        };
+
         // 2. Join the conference
-        VoxeetSDK.conference.join(conference, {})
+        VoxeetSDK.conference.join(conference, constraints)
           .then(() => {
             conferenceAliasInput.disabled = true;
             joinButton.disabled = true;
