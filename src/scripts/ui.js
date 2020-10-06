@@ -36,8 +36,8 @@ const initUI = () => {
         // See: https://dolby.io/developers/interactivity-apis/client-sdk/reference-javascript/model/joinoptions
         const joinOptions = {
           constraints: {
-            audio: false,
-            video: true
+            audio: true,
+            video: false
           },
           simulcast: false
         };
