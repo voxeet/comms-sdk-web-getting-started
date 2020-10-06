@@ -34,13 +34,16 @@ const initUI = () => {
     VoxeetSDK.conference.create(conferenceOptions)
       .then((conference) => {
         // See: https://dolby.io/developers/interactivity-apis/client-sdk/reference-javascript/model/joinoptions
-        const constraints = {
-          audio: true,
-          video: false
+        const joinOptions = {
+          constraints: {
+            audio: false,
+            video: true
+          },
+          simulcast: false
         };
 
         // 2. Join the conference
-        VoxeetSDK.conference.join(conference, constraints)
+        VoxeetSDK.conference.join(conference, joinOptions)
           .then(() => {
             conferenceAliasInput.disabled = true;
             joinButton.disabled = true;
