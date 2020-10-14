@@ -5,6 +5,8 @@ const initUI = () => {
   const leaveButton = document.getElementById('leave-btn');
   const startVideoBtn = document.getElementById('start-video-btn');
   const stopVideoBtn = document.getElementById('stop-video-btn');
+  const startAudioBtn = document.getElementById('start-audio-btn');
+  const stopAudioBtn = document.getElementById('stop-audio-btn');
   const startScreenShareBtn = document.getElementById('start-screenshare-btn');
   const stopScreenShareBtn = document.getElementById('stop-screenshare-btn');
   const startRecordingBtn = document.getElementById('start-recording-btn');
@@ -49,6 +51,8 @@ const initUI = () => {
             joinButton.disabled = true;
             leaveButton.disabled = false;
             startVideoBtn.disabled = false;
+            startAudioBtn.disabled = true;
+            stopAudioBtn.disabled = false;
             startScreenShareBtn.disabled = false;
             startRecordingBtn.disabled = false;
           })
@@ -66,6 +70,8 @@ const initUI = () => {
         leaveButton.disabled = true;
         startVideoBtn.disabled = true;
         stopVideoBtn.disabled = true;
+        startAudioBtn.disabled = true;
+        stopAudioBtn.disabled = true;
         startScreenShareBtn.disabled = true;
         stopScreenShareBtn.disabled = true;
         startRecordingBtn.disabled = true;
@@ -90,6 +96,26 @@ const initUI = () => {
       .then(() => {
         stopVideoBtn.disabled = true;
         startVideoBtn.disabled = false;
+      })
+      .catch((e) => console.log(e));
+  };
+
+  startAudioBtn.onclick = () => {
+    // Start sharing the Audio with the other participants
+    VoxeetSDK.conference.startAudio(VoxeetSDK.session.participant)
+      .then(() => {
+        startAudioBtn.disabled = true;
+        stopAudioBtn.disabled = false;
+      })
+      .catch((e) => console.log(e));
+  };
+
+  stopAudioBtn.onclick = () => {
+    // Stop sharing the Audio with the other participants
+    VoxeetSDK.conference.stopAudio(VoxeetSDK.session.participant)
+      .then(() => {
+        stopAudioBtn.disabled = true;
+        startAudioBtn.disabled = false;
       })
       .catch((e) => console.log(e));
   };
