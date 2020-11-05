@@ -3,8 +3,11 @@ const initUI = () => {
   const joinButton = document.getElementById('join-btn');
   const conferenceAliasInput = document.getElementById('alias-input');
   const leaveButton = document.getElementById('leave-btn');
+  const lblDolbyVoice = document.getElementById('label-dolby-voice');
   const startVideoBtn = document.getElementById('start-video-btn');
   const stopVideoBtn = document.getElementById('stop-video-btn');
+  const startAudioBtn = document.getElementById('start-audio-btn');
+  const stopAudioBtn = document.getElementById('stop-audio-btn');
   const startScreenShareBtn = document.getElementById('start-screenshare-btn');
   const stopScreenShareBtn = document.getElementById('stop-screenshare-btn');
   const startRecordingBtn = document.getElementById('start-recording-btn');
@@ -21,7 +24,8 @@ const initUI = () => {
       liveRecording: false,
       rtcpMode: "average", // worst, average, max
       ttl: 0,
-      videoCodec: "H264" // H264, VP8
+      videoCodec: "H264", // H264, VP8
+      dolbyVoice: true
     };
 
     // See: https://dolby.io/developers/interactivity-apis/client-sdk/reference-javascript/model/conferenceoptions
@@ -44,11 +48,15 @@ const initUI = () => {
 
         // 2. Join the conference
         VoxeetSDK.conference.join(conference, joinOptions)
-          .then(() => {
+          .then((conf) => {
+            lblDolbyVoice.innerHTML = `Dolby Voice is ${conf.params.dolbyVoice ? 'On' : 'Off'}.`;
+
             conferenceAliasInput.disabled = true;
             joinButton.disabled = true;
             leaveButton.disabled = false;
             startVideoBtn.disabled = false;
+            startAudioBtn.disabled = true;
+            stopAudioBtn.disabled = false;
             startScreenShareBtn.disabled = false;
             startRecordingBtn.disabled = false;
           })
@@ -61,11 +69,15 @@ const initUI = () => {
     // Leave the conference
     VoxeetSDK.conference.leave()
       .then(() => {
+        lblDolbyVoice.innerHTML = '';
+
         conferenceAliasInput.disabled = false;
         joinButton.disabled = false;
         leaveButton.disabled = true;
         startVideoBtn.disabled = true;
         stopVideoBtn.disabled = true;
+        startAudioBtn.disabled = true;
+        stopAudioBtn.disabled = true;
         startScreenShareBtn.disabled = true;
         stopScreenShareBtn.disabled = true;
         startRecordingBtn.disabled = true;
@@ -90,6 +102,26 @@ const initUI = () => {
       .then(() => {
         stopVideoBtn.disabled = true;
         startVideoBtn.disabled = false;
+      })
+      .catch((e) => console.log(e));
+  };
+
+  startAudioBtn.onclick = () => {
+    // Start sharing the Audio with the other participants
+    VoxeetSDK.conference.startAudio(VoxeetSDK.session.participant)
+      .then(() => {
+        startAudioBtn.disabled = true;
+        stopAudioBtn.disabled = false;
+      })
+      .catch((e) => console.log(e));
+  };
+
+  stopAudioBtn.onclick = () => {
+    // Stop sharing the Audio with the other participants
+    VoxeetSDK.conference.stopAudio(VoxeetSDK.session.participant)
+      .then(() => {
+        stopAudioBtn.disabled = true;
+        startAudioBtn.disabled = false;
       })
       .catch((e) => console.log(e));
   };
@@ -140,6 +172,8 @@ const initUI = () => {
 
 // Add a video stream to the web page
 const addVideoNode = (participant, stream) => {
+  if (stream.active === false) return;
+
   let videoNode = document.getElementById('video-' + participant.id);
 
   if (!videoNode) {
