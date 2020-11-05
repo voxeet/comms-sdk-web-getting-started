@@ -16,6 +16,7 @@ const main = async () => {
 
   // When a stream is updated
   VoxeetSDK.conference.on('streamUpdated', (participant, stream) => {
+    if (stream.type === 'ScreenShare') return;
     addVideoNode(participant, stream);
   });
 
