@@ -4,17 +4,22 @@ let randomName = avengersNames[Math.floor(Math.random() * avengersNames.length)]
 const main = async () => {
   /* Event handlers */
 
-  // When a video stream is added to the conference
+  // When a stream is added to the conference
   VoxeetSDK.conference.on('streamAdded', (participant, stream) => {
     if (stream.type === 'ScreenShare') {
       return addScreenShareNode(stream);
     }
-
+    
     addVideoNode(participant, stream);
     addParticipantNode(participant);
   });
 
-  // When a video stream is removed from the conference
+  // When a stream is updated
+  VoxeetSDK.conference.on('streamUpdated', (participant, stream) => {
+    addVideoNode(participant, stream);
+  });
+
+  // When a stream is removed from the conference
   VoxeetSDK.conference.on('streamRemoved', (participant, stream) => {
     if (stream.type === 'ScreenShare') {
       return removeScreenShareNode();

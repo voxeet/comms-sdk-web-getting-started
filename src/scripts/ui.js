@@ -3,6 +3,7 @@ const initUI = () => {
   const joinButton = document.getElementById('join-btn');
   const conferenceAliasInput = document.getElementById('alias-input');
   const leaveButton = document.getElementById('leave-btn');
+  const lblDolbyVoice = document.getElementById('label-dolby-voice');
   const startVideoBtn = document.getElementById('start-video-btn');
   const stopVideoBtn = document.getElementById('stop-video-btn');
   const startAudioBtn = document.getElementById('start-audio-btn');
@@ -23,7 +24,8 @@ const initUI = () => {
       liveRecording: false,
       rtcpMode: "average", // worst, average, max
       ttl: 0,
-      videoCodec: "H264" // H264, VP8
+      videoCodec: "H264", // H264, VP8
+      dolbyVoice: true
     };
 
     // See: https://dolby.io/developers/interactivity-apis/client-sdk/reference-javascript/model/conferenceoptions
@@ -46,7 +48,9 @@ const initUI = () => {
 
         // 2. Join the conference
         VoxeetSDK.conference.join(conference, joinOptions)
-          .then(() => {
+          .then((conf) => {
+            lblDolbyVoice.innerHTML = `Dolby Voice is ${conf.params.dolbyVoice ? 'On' : 'Off'}.`;
+
             conferenceAliasInput.disabled = true;
             joinButton.disabled = true;
             leaveButton.disabled = false;
@@ -65,6 +69,8 @@ const initUI = () => {
     // Leave the conference
     VoxeetSDK.conference.leave()
       .then(() => {
+        lblDolbyVoice.innerHTML = '';
+
         conferenceAliasInput.disabled = false;
         joinButton.disabled = false;
         leaveButton.disabled = true;
@@ -166,6 +172,8 @@ const initUI = () => {
 
 // Add a video stream to the web page
 const addVideoNode = (participant, stream) => {
+  if (stream.active === false) return;
+
   let videoNode = document.getElementById('video-' + participant.id);
 
   if (!videoNode) {
