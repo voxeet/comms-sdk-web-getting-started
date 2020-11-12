@@ -172,8 +172,6 @@ const initUI = () => {
 
 // Add a video stream to the web page
 const addVideoNode = (participant, stream) => {
-  if (stream.active === false) return;
-
   let videoNode = document.getElementById('video-' + participant.id);
 
   if (!videoNode) {
