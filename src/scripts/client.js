@@ -9,15 +9,23 @@ const main = async () => {
     if (stream.type === 'ScreenShare') {
       return addScreenShareNode(stream);
     }
-    
-    addVideoNode(participant, stream);
+
+    if (stream.getVideoTracks().length) {
+      // Only add the video node if there is a video track
+      addVideoNode(participant, stream);
+    }
+
     addParticipantNode(participant);
   });
 
   // When a stream is updated
   VoxeetSDK.conference.on('streamUpdated', (participant, stream) => {
     if (stream.type === 'ScreenShare') return;
-    addVideoNode(participant, stream);
+
+    if (stream.getVideoTracks().length) {
+      // Only add the video node if there is a video track
+      addVideoNode(participant, stream);
+    }
   });
 
   // When a stream is removed from the conference
