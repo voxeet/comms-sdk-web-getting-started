@@ -186,6 +186,7 @@ const addVideoNode = (participant, stream) => {
     videoContainer.appendChild(videoNode);
 
     videoNode.autoplay = 'autoplay';
+    videoNode.playsinline = true;
     videoNode.muted = true;
   }
 
