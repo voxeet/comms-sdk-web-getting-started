@@ -180,9 +180,9 @@ const addVideoNode = (participant, stream) => {
     videoNode.setAttribute('id', 'video-' + participant.id);
     videoNode.setAttribute('height', 240);
     videoNode.setAttribute('width', 320);
-    videoNode.setAttribute("playsinline", true)
-    videoNode.setAttribute("muted", true)
-    videoNode.setAttribute("autoplay", 'autoplay')
+    videoNode.setAttribute("playsinline", true);
+    videoNode.setAttribute("muted", true);
+    videoNode.setAttribute("autoplay", 'autoplay');
     videoNode.style = 'background: gray;';
 
     const videoContainer = document.getElementById('video-container');
