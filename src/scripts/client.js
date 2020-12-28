@@ -25,6 +25,8 @@ const main = async () => {
     if (stream.getVideoTracks().length) {
       // Only add the video node if there is a video track
       addVideoNode(participant, stream);
+    } else {
+      removeVideoNode(participant);
     }
   });
 
