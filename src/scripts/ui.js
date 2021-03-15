@@ -175,7 +175,7 @@ const addVideoNode = (participant, stream) => {
     videoNode.setAttribute('height', 240);
     videoNode.setAttribute('width', 320);
     videoNode.setAttribute("playsinline", true)
-    videoNode.setAttribute("muted", true)
+    videoNode.muted = true;
     videoNode.setAttribute("autoplay", 'autoplay')
     videoNode.style = 'background: gray;';
 
