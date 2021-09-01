@@ -6,7 +6,6 @@ This is the sample app from the browser app used in the
 You can find additional reference documentation here:
 - [JavaScript Reference](https://docs.dolby.io/interactivity/docs/js-client-sdk-voxeetsdk)
 
-
 ## Running
 
 See [this page](https://docs.dolby.io/interactivity/docs/create-a-basic-audio-conference-application#step-6-run-your-application)
