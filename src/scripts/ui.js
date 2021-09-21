@@ -60,9 +60,9 @@ const initUI = () => {
             startScreenShareBtn.disabled = false;
             startRecordingBtn.disabled = false;
           })
-          .catch((e) => console.log(e));
+          .catch((err) => console.error(err));
       })
-      .catch((e) => console.log(e));
+      .catch((err) => console.error(err));
   };
 
   leaveButton.onclick = () => {
@@ -83,7 +83,7 @@ const initUI = () => {
         startRecordingBtn.disabled = true;
         stopRecordingBtn.disabled = true;
       })
-      .catch((e) => console.log(e));
+      .catch((err) => console.error(err));
   };
 
   startVideoBtn.onclick = () => {
@@ -93,7 +93,7 @@ const initUI = () => {
         startVideoBtn.disabled = true;
         stopVideoBtn.disabled = false;
       })
-      .catch((e) => console.log(e));
+      .catch((err) => console.error(err));
   };
 
   stopVideoBtn.onclick = () => {
@@ -103,7 +103,7 @@ const initUI = () => {
         stopVideoBtn.disabled = true;
         startVideoBtn.disabled = false;
       })
-      .catch((e) => console.log(e));
+      .catch((err) => console.error(err));
   };
 
   startAudioBtn.onclick = () => {
@@ -113,7 +113,7 @@ const initUI = () => {
         startAudioBtn.disabled = true;
         stopAudioBtn.disabled = false;
       })
-      .catch((e) => console.log(e));
+      .catch((err) => console.error(err));
   };
 
   stopAudioBtn.onclick = () => {
@@ -123,7 +123,7 @@ const initUI = () => {
         stopAudioBtn.disabled = true;
         startAudioBtn.disabled = false;
       })
-      .catch((e) => console.log(e));
+      .catch((err) => console.error(err));
   };
 
   startScreenShareBtn.onclick = () => {
@@ -133,13 +133,13 @@ const initUI = () => {
         startScreenShareBtn.disabled = true;
         stopScreenShareBtn.disabled = false;
       })
-      .catch((e) => console.log(e));
+      .catch((err) => console.error(err));
   };
 
   stopScreenShareBtn.onclick = () => {
     // Stop the Screen Sharing
     VoxeetSDK.conference.stopScreenShare()
-      .catch((e) => console.log(e));
+      .catch((err) => console.error(err));
   };
 
   startRecordingBtn.onclick = () => {
@@ -152,7 +152,7 @@ const initUI = () => {
         startRecordingBtn.disabled = true;
         stopRecordingBtn.disabled = false;
       })
-      .catch((e) => console.log(e));
+      .catch((err) => console.error(err));
   };
 
   stopRecordingBtn.onclick = () => {
@@ -165,7 +165,7 @@ const initUI = () => {
         startRecordingBtn.disabled = false;
         stopRecordingBtn.disabled = true;
       })
-      .catch((e) => console.log(e));
+      .catch((err) => console.error(err));
   };
 
 };
