@@ -204,7 +204,7 @@ const removeVideoNode = (participant) => {
 
 // Add a new participant to the list
 const addParticipantNode = (participant) => {
-  // If the participant is the current session user, don't add himself to the list
+  // If the participant is the current session user, don't add them to the list
   if (participant.id === VoxeetSDK.session.participant.id) return;
 
   let participantNode = document.createElement('li');
