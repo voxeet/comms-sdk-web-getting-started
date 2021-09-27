@@ -45,18 +45,11 @@ const main = async () => {
     // WARNING: It is best practice to use the VoxeetSDK.initializeToken function to initialize the SDK.
     // Please read the documentation at:
     // https://docs.dolby.io/interactivity/docs/initializing
-    
     VoxeetSDK.initialize('customerKey', 'customerSecret');
-    
-    // Show logging in indicator before user logged in
-    loader.style.display = 'block'
 
     // Open a session for the user
     await VoxeetSDK.session.open({ name: randomName });
-    
-    // Remove logging in indicator after user is logged in
-    loader.style.display = 'none'
-    
+
     // Initialize the UI
     initUI();
   } catch (e) {
