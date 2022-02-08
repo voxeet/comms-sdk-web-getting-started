@@ -1,4 +1,4 @@
-# Dolby.io Communications APIs Browser SDK Getting Started app
+# Dolby.io Communications SDK for Web - Getting Started app
 
 This is the sample app from the browser app used in the
 [Getting Started](https://docs.dolby.io/communications/docs/create-a-basic-audio-conference-application) article. 
