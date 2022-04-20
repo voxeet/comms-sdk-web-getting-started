@@ -46,7 +46,7 @@ const main = async () => {
     // Please read the documentation at:
     // https://docs.dolby.io/communications-apis/docs/initializing-javascript
     VoxeetSDK.initializeToken(access_token, () => {
-      // This callback is called when the token needs to be refreshed. See the next section for details.
+      // This callback is called when the token needs to be refreshed
     }).catch(error => {
       // An Error has occured
     })
