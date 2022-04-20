@@ -45,7 +45,11 @@ const main = async () => {
     // WARNING: It is best practice to use the VoxeetSDK.initializeToken function to initialize the SDK.
     // Please read the documentation at:
     // https://docs.dolby.io/communications-apis/docs/initializing-javascript
-    VoxeetSDK.initialize('customerKey', 'customerSecret');
+    VoxeetSDK.initializeToken(access_token, () => {
+      // This callback is called when the token needs to be refreshed. See the next section for details.
+    }).catch(error => {
+      // An Error has occured
+    })
 
     // Open a session for the user
     await VoxeetSDK.session.open({ name: randomName });
