@@ -44,8 +44,8 @@ const main = async () => {
     // Initialize the Voxeet SDK
     // Please read the documentation at:
     // https://docs.dolby.io/communications-apis/docs/initializing-javascript
-    // Grab your demos client token from your dashboard and insert into access_token
-    let access_token = "<INSERT DEMOS CLIENT ACCESS TOKEN HERE>";
+    // Generate a test client access token from the Dolby.io dashboard and insert into access_token variable
+    let access_token = "TestClientAccessToken";
     VoxeetSDK.initializeToken(access_token, () => {
       return new Promise(function (resolve, reject) {
         resolve.initializeToken(access_token);
