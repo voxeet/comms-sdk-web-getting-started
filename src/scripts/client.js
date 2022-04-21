@@ -48,9 +48,9 @@ const main = async () => {
     let access_token = "<INSERT DEMOS CLIENT ACCESS TOKEN HERE>"
     VoxeetSDK.initializeToken(access_token, () => {
       return new Promise(function (resolve, reject) {
-        resolve.initializeToken(access_token)
-      })
-    })
+        resolve.initializeToken(access_token);
+      });
+    });
 
     // Open a session for the user
     await VoxeetSDK.session.open({ name: randomName });
