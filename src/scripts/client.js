@@ -45,10 +45,12 @@ const main = async () => {
     // WARNING: It is best practice to use the VoxeetSDK.initializeToken function to initialize the SDK.
     // Please read the documentation at:
     // https://docs.dolby.io/communications-apis/docs/initializing-javascript
+    // Grab your demos client token from your dashboard and insert into access_token
+    let access_token = "<INSERT DEMOS CLIENT ACCESS TOKEN HERE>"
     VoxeetSDK.initializeToken(access_token, () => {
-      // This callback is called when the token needs to be refreshed
-    }).catch(error => {
-      // An Error has occured
+      return new Promise(function (resolve, reject) {
+        resolve.initializeToken(access_token)
+      })
     })
 
     // Open a session for the user
