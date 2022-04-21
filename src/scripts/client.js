@@ -42,10 +42,15 @@ const main = async () => {
 
   try {
     // Initialize the Voxeet SDK
-    // WARNING: It is best practice to use the VoxeetSDK.initializeToken function to initialize the SDK.
     // Please read the documentation at:
     // https://docs.dolby.io/communications-apis/docs/initializing-javascript
-    VoxeetSDK.initialize('customerKey', 'customerSecret');
+    // Generate a test client access token from the Dolby.io dashboard and insert into access_token variable
+    let access_token = "TestClientAccessToken";
+    VoxeetSDK.initializeToken(access_token, () => {
+      return new Promise(function (resolve, reject) {
+        resolve.initializeToken(access_token);
+      });
+    });
 
     // Open a session for the user
     await VoxeetSDK.session.open({ name: randomName });
