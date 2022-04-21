@@ -42,7 +42,6 @@ const main = async () => {
 
   try {
     // Initialize the Voxeet SDK
-    // WARNING: It is best practice to use the VoxeetSDK.initializeToken function to initialize the SDK.
     // Please read the documentation at:
     // https://docs.dolby.io/communications-apis/docs/initializing-javascript
     // Grab your demos client token from your dashboard and insert into access_token
