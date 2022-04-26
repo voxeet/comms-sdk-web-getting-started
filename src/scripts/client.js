@@ -46,9 +46,13 @@ const main = async () => {
     // https://docs.dolby.io/communications-apis/docs/initializing-javascript
     // Generate a test client access token from the Dolby.io dashboard and insert into access_token variable
     let access_token = "TestClientAccessToken";
-    VoxeetSDK.initializeToken(access_token, () => {
-      return new Promise(function (resolve, reject) {
-        resolve.initializeToken(access_token);
+    VoxeetSDK.initializeToken(access_token, (isExpired) => {
+      return new Promise((resolve, reject) => {
+        if (isExpired) {
+          reject('The access token has expired.');
+        } else {
+          resolve(access_token);
+        }
       });
     });
 
