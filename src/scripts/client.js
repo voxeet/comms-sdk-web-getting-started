@@ -44,8 +44,8 @@ const main = async () => {
     // Initialize the Voxeet SDK
     // Please read the documentation at:
     // https://docs.dolby.io/communications-apis/docs/initializing-javascript
-    // Generate a client access token from the Dolby.io dashboard and insert into access_token variable
-    let access_token = "ClientAcessToken";
+    // Generate a test client access token from the Dolby.io dashboard and insert into access_token variable
+    let access_token = "TestClientAccessToken";
     VoxeetSDK.initializeToken(access_token, (isExpired) => {
       return new Promise((resolve, reject) => {
         if (isExpired) {
