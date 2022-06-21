@@ -56,19 +56,19 @@ dolbyio.getAccessToken = () => {
 		console.log(inputToken);
 	}
 
-    try {
-        const token = accessToken.split('.')[1];
-        const jwt = JSON.parse(window.atob(token));
-        const expiration = new Date(jwt.exp * 1000);
+	try {
+		const token = accessToken.split('.')[1];
+		const jwt = JSON.parse(window.atob(token));
+		const expiration = new Date(jwt.exp * 1000);
 
-        console.log(`Token: ${accessToken}`);
-        console.log(`Expires: ${expiration}`);
-        if (expiration.getTime() <= new Date().getTime()) {
-            console.log("This token has expired.  Fetch a new one from the Dolby.io dashboard.");
-        }
+		console.log(`Token: ${accessToken}`);
+		console.log(`Expires: ${expiration}`);
+		if (expiration.getTime() <= new Date().getTime()) {
+			console.log("This token has expired.  Fetch a new one from the Dolby.io dashboard.");
+		}
     } catch(error) {
-        console.error(error);
-    }
+		console.error(error);
+	}
 	console.groupEnd();
 
 	return accessToken;
