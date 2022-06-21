@@ -42,9 +42,9 @@ dolbyio.tokenPrompt = () => {
  * as a querystring parameter.
  */
 dolbyio.getAccessToken = () => {
-    // For an insecure but quick test, you can return a hard-coded
-    // access token during development.
-    // return '<REPLACE-WITH-TEMPORARY-ACCESS-TOKEN>';
+	// For an insecure but quick test, you can return a hard-coded
+	// access token during development.
+	// return '<REPLACE-WITH-TEMPORARY-ACCESS-TOKEN>';
 
 	const queryParams = new URLSearchParams(window.location.search);
 
@@ -66,7 +66,7 @@ dolbyio.getAccessToken = () => {
 		if (expiration.getTime() <= new Date().getTime()) {
 			console.log("This token has expired.  Fetch a new one from the Dolby.io dashboard.");
 		}
-    } catch(error) {
+	} catch(error) {
 		console.error(error);
 	}
 	console.groupEnd();
