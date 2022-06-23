@@ -265,7 +265,7 @@
             handleConferenceFlow();
 
             // When user clicks the Invite button, generate a url to join the same conference
-            document.getElementById("btn-invite").onclick = async () => {
+            document.getElementById("btn-invite").onclick = () => {
                 console.group("Step 5: Invite a remote participant")
                 let url = `https://developer.dolby.io/demos/comms-sdk-web-getting-started/index.html?token=${token}&alias=${alias}&name=guest`;
                 console.log(`Invite a guest with URL: ${url}`);
