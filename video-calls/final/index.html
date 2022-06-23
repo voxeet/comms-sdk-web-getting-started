@@ -84,7 +84,7 @@
     <!-- Dolby.io Starter Application -->
     <script type="text/javascript">
         const shareMessage = (message) => {
-            document.getElementById('message').innerText = message;
+            document.getElementById("message").innerText = message;
         }
 
         /** 
@@ -154,28 +154,28 @@
         const handleConferenceFlow = () => {
 
             // Custom behavior for when there is a media stream added
-            VoxeetSDK.conference.on('streamAdded', (participant, stream) => {
+            VoxeetSDK.conference.on("streamAdded", (participant, stream) => {
                 console.log(`Stream Added for ${participant.info.name}`);
                 console.log(`  Type: ${stream.type}`);
                 console.log(`  Video Tracks: ${stream.getVideoTracks().length}`);
 
-                if (stream.type === 'Camera') {
+                if (stream.type === "Camera") {
                     shareVideo(participant, stream);
                 }
             });
 
             // Custom behavior for when there is a media stream updated which happens once an attendee starts sharing video
-            VoxeetSDK.conference.on('streamUpdated', (participant, stream) => {
+            VoxeetSDK.conference.on("streamUpdated", (participant, stream) => {
                 console.log(`Stream Updated for ${participant.info.name}`);
                 console.log(`  Type: ${stream.type}`);
                 console.log(`  Video Tracks: ${stream.getVideoTracks().length}`);
-                if (stream.type === 'Camera' && stream.getVideoTracks().length) {
+                if (stream.type === "Camera" && stream.getVideoTracks().length) {
                     shareVideo(participant, stream);
                 }
             });
 
             // Custom behavior for when the app stops receiving a media stream for remote participants
-            VoxeetSDK.conference.on('streamRemoved', (participant, stream) => {
+            VoxeetSDK.conference.on("streamRemoved", (participant, stream) => {
                 console.log(`Stream Removed for ${participant.info.name}`);
                 const videoNode = document.getElementById(`video-${participant.id}`);
                 if (videoNode) {
@@ -186,7 +186,7 @@
             // Custom behavior for when the participant has left the conference
             VoxeetSDK.conference.on("left", async () => {
                 await VoxeetSDK.session.close();
-                console.log('Session closed.');
+                console.log("Session closed.");
             });
         }
 
@@ -198,10 +198,10 @@
         const shareVideo = (participant, stream) => {
             console.group("Step 4: Start and Share Video");
 
-            let perspective = 'self-view';
+            let perspective = "self-view";
             if (VoxeetSDK.session.participant.id !== participant.id) {
                 console.log("Adding media stream for remote user.");
-                perspective = 'remote-view';
+                perspective = "remote-view";
             }
 
             let videoNode = document.getElementById(`video-${participant.id}`);
@@ -237,7 +237,7 @@
             console.group("Final Step: Leave the Conference");
             try {
                 await VoxeetSDK.conference.leave();
-                shareMessage('Getting Started Success: Conference has ended.')
+                shareMessage("Getting Started Success: Conference has ended.")
             } catch (error) {
                 console.error(error);
             }
@@ -247,8 +247,8 @@
         const main = async () => {
             // Configure the application from query parameter values
             const queryParams = new URLSearchParams(window.location.search);
-            const name = queryParams.get('name') || 'developer';
-            const alias = queryParams.get('alias') || 'web-sdk-starter';
+            const name = queryParams.get("name") || "developer";
+            const alias = queryParams.get("alias") || "web-sdk-starter";
 
             // Establish Real-time Communications by first initializing the Dolby.io Web SDK with credentials
             const token = await initializeToken();
@@ -257,7 +257,7 @@
             await openSession(name);
 
             // When user clicks the Join button, start and join a conference for the given alias
-            document.getElementById('btn-join').onclick = async () => {
+            document.getElementById("btn-join").onclick = async () => {
                 await createAndJoinConference(alias, name);
             };
 
@@ -265,8 +265,8 @@
             handleConferenceFlow();
 
             // When user clicks the Invite button, generate a url to join the same conference
-            document.getElementById('btn-invite').onclick = async () => {
-                console.group('Step 5: Invite a remote participant')
+            document.getElementById("btn-invite").onclick = async () => {
+                console.group("Step 5: Invite a remote participant")
                 let url = `https://developer.dolby.io/demos/comms-sdk-web-getting-started/index.html?token=${token}&alias=${alias}&name=guest`;
                 console.log(`Invite a guest with URL: ${url}`);
                 shareMessage(`Share the URL copied to your browser clipboard: ${url}`);
@@ -275,7 +275,7 @@
             }
 
             // When user clicks the Leave button, end the conference
-            document.getElementById('btn-leave').onclick = async () => {
+            document.getElementById("btn-leave").onclick = async () => {
                 await leaveConference();
                 console.log("Getting Started Guide complete, congratulations!");
             };
