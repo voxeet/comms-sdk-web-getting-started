@@ -94,7 +94,7 @@
         const initializeToken = () => {
             console.group("Step 1: Initialize the SDK");
             const token = dolbyio.getAccessToken();
-            VoxeetSDK.initializeToken(token, () => new Promise((resolve) => resolve(accessToken)));
+            VoxeetSDK.initializeToken(token, () => new Promise((resolve) => resolve(token)));
             shareMessage("Step 1: Web SDK initialized.");
             console.groupEnd();
 
