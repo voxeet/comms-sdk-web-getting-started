@@ -94,7 +94,7 @@
         const initializeToken = () => {
             console.group("Step 1: Initialize the SDK");
             const token = dolbyio.getAccessToken();
-            VoxeetSDK.initializeToken(token, () => { console.log("Get a New Access Token"); });
+            VoxeetSDK.initializeToken(token, () => new Promise((resolve) => resolve(accessToken)));
             shareMessage("Step 1: Web SDK initialized.");
             console.groupEnd();
 
@@ -267,7 +267,7 @@
             // When user clicks the Invite button, generate a url to join the same conference
             document.getElementById("btn-invite").onclick = () => {
                 console.group("Step 5: Invite a remote participant")
-                let url = `https://developer.dolby.io/demos/comms-sdk-web-getting-started/index.html?token=${token}&alias=${alias}&name=guest`;
+                const url = `https://developer.dolby.io/demos/comms-sdk-web-getting-started/index.html?token=${token}&alias=${alias}&name=guest`;
                 console.log(`Invite a guest with URL: ${url}`);
                 shareMessage(`Share the URL copied to your browser clipboard: ${url}`);
                 navigator.clipboard.writeText(url);

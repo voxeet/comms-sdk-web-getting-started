@@ -1,4 +1,4 @@
-# Dolby.io Communications Web SDK -- Getting Started
+# Dolby.io Communications Web SDK - Getting Started
 
 This starter project demonstrates the mechanics of making a Voice and Video Call with Dolby.io.
 
@@ -11,12 +11,14 @@ Follow the [Getting Started](https://docs.dolby.io/communications-apis/docs/gett
 This project runs as a single-page application with any web server.
 
 You can run a web server in a Node.js environment with `live-server` or `http-server`:
-```
+
+```bash
 npx http-server
 ```
 
 You can run a web server in a Python 3 environment with `http.server`:
-```
+
+```bash
 python3 -m http.server
 ```
 

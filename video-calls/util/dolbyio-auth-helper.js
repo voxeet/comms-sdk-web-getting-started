@@ -5,15 +5,14 @@ const dolbyio = {};
  * only works with the starter project that has the elements
  * defined.
  *
- * @param {*}
  * @returns token (string)
  */
 dolbyio.tokenPrompt = () => {
 	document.getElementById('btn-token').onclick = async () => {
 		modal.hide();
 
-		let token = document.getElementById('input-token').value;
-		let params = new URLSearchParams(window.location.search);
+		const token = document.getElementById('input-token').value;
+		const params = new URLSearchParams(window.location.search);
 		params.set("token", token);
 		window.location.search = params.toString();
 
@@ -30,12 +29,11 @@ dolbyio.tokenPrompt = () => {
 }
 
 /**
- * Return an access token for initializing the Dolby.io Communications
+ * Returns an access token for initializing the Dolby.io Communications
  * Web SDK. This method is looking for a token to be provided as a
  * querytring parameter or will prompt with a modal dialog for manual
  * entry.
  *
- * @param {*}
  * @returns token (string)
  *
  * This function will help provide a token that is given to the application
@@ -52,7 +50,7 @@ dolbyio.getAccessToken = () => {
 	const accessToken = queryParams.get('token');
 
 	if (!accessToken) {
-		let inputToken = dolbyio.tokenPrompt();
+		const inputToken = dolbyio.tokenPrompt();
 		console.log(inputToken);
 	}
 
@@ -64,7 +62,7 @@ dolbyio.getAccessToken = () => {
 		console.log(`Token: ${accessToken}`);
 		console.log(`Expires: ${expiration}`);
 		if (expiration.getTime() <= new Date().getTime()) {
-			console.log("This token has expired.  Fetch a new one from the Dolby.io dashboard.");
+			console.log("This token has expired. Fetch a new one from the Dolby.io dashboard.");
 		}
 	} catch(error) {
 		console.error(error);
